@@ -5,5 +5,4 @@ DB_CONFIG = {
     'password': 'rootpassword',
     'host': '127.0.0.1',
     'database': 'snowy_ucu'
-
 }
