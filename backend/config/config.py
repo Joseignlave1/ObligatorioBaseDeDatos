@@ -6,3 +6,5 @@ DB_CONFIG = {
     'host': '127.0.0.1',
     'database': 'snowy_ucu'
 }
+
+JWT_KEY = "STwKQen5rxZVR+fE4ZvVKBLRf37h7WSt4Zyqw6yAUbE="

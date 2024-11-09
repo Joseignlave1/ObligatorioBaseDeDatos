@@ -1,4 +1,4 @@
-from backend import get_db_connection
+from ..db_connection import get_db_connection
 
 def getActivitiesEndpoint():
     connection = get_db_connection()
@@ -19,3 +19,4 @@ def getActivityByIdEndpoint(activity_id):
     cursor.close()
     connection.close()
     return activity
+
