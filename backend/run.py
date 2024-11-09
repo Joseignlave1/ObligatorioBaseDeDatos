@@ -1,7 +1,8 @@
 # run.py
 from flask import Flask
-from backend.views.activity_routes import activity_bp
-from backend import create_app
+from views.activity_routes import activity_bp
+#from backend import create_app
+from __init__ import create_app
 
 app = create_app()
 

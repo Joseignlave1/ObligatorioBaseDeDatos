@@ -1,6 +1,7 @@
 import mysql.connector
 from config import DB_CONFIG
 from flask import Flask
+from views.user_routes import main
 
 ##Funcion encargada de realizar la conexion con la base de datos
 def get_db_connection():
@@ -14,7 +15,7 @@ def get_db_connection():
     return connection
 def create_app():
     app = Flask(__name__)
-    from .views.user_routes import main
     app.register_blueprint(main)
+    #from .views.user_routes import main
 
     return app
