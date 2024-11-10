@@ -10,7 +10,6 @@ def getAllActivities():
     return jsonify(activities)
 
 @activity_bp.route("/activities/<int:activity_id>", methods = ['GET'])
-# @jwt authorize
 
 def getActivityById(activity_id):
     activity = getActivityByIdEndpoint(activity_id)
