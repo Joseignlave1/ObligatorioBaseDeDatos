@@ -7,12 +7,15 @@ sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 from flask import Flask, jsonify
 from views.activity_routes import activity_bp
+from views.auth_routes import auth_bp
 from backend import create_app
 from flask_jwt_extended import JWTManager
 app = create_app()
 jwt = JWTManager(app)
 
-app.register_blueprint(activity_bp, url_prefix = '/api')
+app.register_blueprint(activity_bp,url_prefix = '/api')
+
+app.register_blueprint(auth_bp,url_prefix = '/api')
 
 #Errores cuando no se envia el token
 
