@@ -1,13 +1,13 @@
 from flask import Blueprint, jsonify
 from flask_jwt_extended import jwt_required
-from controllers.activity_controller import getAllActivitiesEndpoint, getActivityByIdEndpoint
+from ..controllers.activity_controller import getAllActivitiesEndpoint, getActivityByIdEndpoint
 
 activity_bp = Blueprint('activity_bp', __name__)
 
 @activity_bp.route("/activities/all", methods = ['GET'])
 @jwt_required()
 def getAllActivities():
-    activities = getActivitiesEndpoint()
+    activities = getAllActivitiesEndpoint()
     if activities:
         return jsonify(activities)
     else:
