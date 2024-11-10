@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from flask_jwt_extended import jwt_required
 from security.Security import Security
 from controllers.student_controller import (
     registerUserEndpoint,
@@ -12,7 +13,7 @@ from controllers.student_controller import (
 student_bp = Blueprint('student_bp', __name__)
 
 @students_bp.route("/register", method = ['POST'])
-
+@jwt_required()
 def registerUser():
     data = request.json
     email = data.get("email")
@@ -28,11 +29,13 @@ def registerUser():
     return jsonify({'message': 'user registered successfully'}, jwt_token), 201
 
 @student_bp.route("/students/all", methods=['GET'])
+@jwt_required()
 def getAllStudents():
     students = getAllStudentsEndpoint()
     return jsonify(students)
 
 @student_bp.route("/students/<int:student_id>", methods=['GET'])
+@jwt_required()
 def getStudentByIdRoute(student_id):
     student = getStudentById(student_id)
     if student:
@@ -41,6 +44,7 @@ def getStudentByIdRoute(student_id):
         return jsonify({'message': 'Student not found'}), 404
 
 @student_bp.route("/students", methods=['POST'])
+@jwt_required()
 def addStudent():
     data = request.json
     student_id = data.get('id')
@@ -53,6 +57,7 @@ def addStudent():
     return jsonify(result), 201
 
 @student_bp.route("/students/<int:student_id>", methods=['PUT'])
+@jwt_required()
 def modifyStudentRoute(student_id):
     data = request.json
     first_name = data.get('first_name')
@@ -64,6 +69,7 @@ def modifyStudentRoute(student_id):
     return jsonify(result)
 
 @student_bp.route("/students/<int:student_id>", methods=['DELETE'])
+@jwt_required()
 def deleteStudentRoute(student_id):
     result = deleteStudent(student_id)
     return jsonify(result)
