@@ -1,5 +1,7 @@
 from flask import Blueprint, jsonify, request
+from security.Security import Security
 from controllers.student_controller import (
+    registerUserEndpoint,
     getAllStudentsEndpoint,
     getStudentById,
     addStudentEndpoint,
@@ -8,6 +10,22 @@ from controllers.student_controller import (
 )
 
 student_bp = Blueprint('student_bp', __name__)
+
+@students_bp.route("/register", method = ['POST'])
+
+def registerUser():
+    data = request.json
+    email = data.get("email")
+    password = data.get("password")
+
+    userRegistered = registerUserEndpoint(email, password)
+
+    if userRegistered is None:
+        return jsonify({'message': 'there was an error with the registration'}), 500
+
+    jwt_token = Security.generate_jwt_token(userRegistered)
+
+    return jsonify({'message': 'user registered successfully'}, jwt_token), 201
 
 @student_bp.route("/students/all", methods=['GET'])
 def getAllStudents():
@@ -49,3 +67,4 @@ def modifyStudentRoute(student_id):
 def deleteStudentRoute(student_id):
     result = deleteStudent(student_id)
     return jsonify(result)
+

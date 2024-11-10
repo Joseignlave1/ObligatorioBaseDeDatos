@@ -19,3 +19,4 @@ def getActivityByIdEndpoint(activity_id):
     cursor.close()
     connection.close()
     return activity
+
