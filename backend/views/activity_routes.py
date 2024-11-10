@@ -1,7 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_jwt_extended import jwt_required
-
-from backend.controllers.activity_controller import getActivitiesEndpoint, getActivityByIdEndpoint
+from controllers.activity_controller import getAllActivitiesEndpoint, getActivityByIdEndpoint
 
 activity_bp = Blueprint('activity_bp', __name__)
 
@@ -9,7 +8,6 @@ activity_bp = Blueprint('activity_bp', __name__)
 @jwt_required()
 def getAllActivities():
     activities = getActivitiesEndpoint()
-
     if activities:
         return jsonify(activities)
     else:

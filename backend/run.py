@@ -1,21 +1,25 @@
 # run.py
 import sys
 from pathlib import Path
+from flask import Flask, jsonify
+from flask_jwt_extended import JWTManager
+from views.activity_routes import activity_bp
+from views.shift_routes import shift_bp
+from views.student_routes import student_bp
+from __init__ import create_app
+
 
 # Añade el directorio raíz del proyecto a `sys.path`
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-from flask import Flask, jsonify
-from views.activity_routes import activity_bp
-from backend import create_app
-from flask_jwt_extended import JWTManager
 app = create_app()
 jwt = JWTManager(app)
 
 app.register_blueprint(activity_bp, url_prefix = '/api')
+app.register_blueprint(shift_bp, url_prefix = '/api')
+app.register_blueprint(student_bp, url_prefix = '/api')
 
 #Errores cuando no se envia el token
-
 @jwt.unauthorized_loader
 
 def unauthorized_response(callback):
