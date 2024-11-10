@@ -19,6 +19,7 @@ app.register_blueprint(activity_bp, url_prefix = '/api')
 app.register_blueprint(shift_bp, url_prefix = '/api')
 app.register_blueprint(student_bp, url_prefix = '/api')
 
+
 #Errores cuando no se envia el token
 @jwt.unauthorized_loader
 

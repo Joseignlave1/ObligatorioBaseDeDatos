@@ -1,8 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required
-from security.Security import Security
-from controllers.student_controller import (
-    registerUserEndpoint,
+from ..controllers.student_controller  import (
     getAllStudentsEndpoint,
     getStudentById,
     addStudentEndpoint,
@@ -11,22 +9,6 @@ from controllers.student_controller import (
 )
 
 student_bp = Blueprint('student_bp', __name__)
-
-@students_bp.route("/register", method = ['POST'])
-@jwt_required()
-def registerUser():
-    data = request.json
-    email = data.get("email")
-    password = data.get("password")
-
-    userRegistered = registerUserEndpoint(email, password)
-
-    if userRegistered is None:
-        return jsonify({'message': 'there was an error with the registration'}), 500
-
-    jwt_token = Security.generate_jwt_token(userRegistered)
-
-    return jsonify({'message': 'user registered successfully'}, jwt_token), 201
 
 @student_bp.route("/students/all", methods=['GET'])
 @jwt_required()

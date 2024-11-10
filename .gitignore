@@ -2,6 +2,8 @@
 # Ignorar el entorno virtual de Python
 backend/venv/
 
+# Ignorar archivo de config de Python
+backend/config/
 # Ignorar dependencias de Node.js en frontend
 frontend/node_modules
 frontend/.pnp
