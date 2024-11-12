@@ -9,11 +9,9 @@ def get_db_connection():
         host = DB_CONFIG['host'],
         database = DB_CONFIG['database']
     )
-
     return connection
 
 def create_app():
     app = Flask(__name__)
     app.register_blueprint(main)
-
     return app
