@@ -1,6 +1,10 @@
 from flask import Blueprint, jsonify, request
+<<<<<<< HEAD
 from flask_jwt_extended import jwt_required
 from ..controllers.student_controller  import (
+=======
+from backend.controllers.student_controller  import (
+>>>>>>> 3ced2683 (Refactorize main)
     getAllStudentsEndpoint,
     getStudentById,
     addStudentEndpoint,
