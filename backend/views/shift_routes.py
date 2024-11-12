@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 
 from flask_jwt_extended import jwt_required
 
-from ..controllers.shift_controller import (
+from backend.controllers.shift_controller import (
     getAllShiftsEndpoint,
     getShiftByIdEndpoint,
     addShiftEndpoint,

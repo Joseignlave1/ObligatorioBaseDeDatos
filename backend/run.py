@@ -3,10 +3,10 @@ import sys
 from pathlib import Path
 from flask import Flask, jsonify
 from flask_jwt_extended import JWTManager
-from views.activity_routes import activity_bp
-from views.shift_routes import shift_bp
-from views.student_routes import student_bp
-from __init__ import create_app
+from backend.views.activity_routes import activity_bp
+from backend.views.shift_routes import shift_bp
+from backend.views.student_routes import student_bp
+from backend.__init__ import create_app
 
 
 # Añade el directorio raíz del proyecto a `sys.path`
