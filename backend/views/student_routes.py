@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from ..controllers.student_controller  import (
+from backend.controllers.student_controller  import (
     getAllStudentsEndpoint,
     getStudentById,
     addStudentEndpoint,

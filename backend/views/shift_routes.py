@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from ..controllers.shift_controller import (
+from backend.controllers.shift_controller import (
     getAllShiftsEndpoint,
     getShiftByIdEndpoint,
     addShiftEndpoint,
