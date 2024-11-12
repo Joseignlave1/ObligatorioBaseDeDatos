@@ -1,4 +1,4 @@
-from __init__ import get_db_connection
+from ..db_connection import get_db_connection
 
 def getAllStudentsEndpoint():
     connection = get_db_connection()

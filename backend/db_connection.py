@@ -1,5 +1,5 @@
 import mysql.connector
-from config.config import DB_CONFIG
+from backend.config.config import DB_CONFIG
 ##Funcion encargada de realizar la conexion con la base de datos
 def get_db_connection():
     connection = mysql.connector.connect(
