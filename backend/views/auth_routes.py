@@ -1,5 +1,3 @@
-from crypt import methods
-
 from flask import Blueprint, jsonify, request
 from backend.controllers.auth_controller import registerEndpoint, loginEndpoint
 from backend.security.Security import Security

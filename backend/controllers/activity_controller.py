@@ -1,6 +1,5 @@
 from ..db_connection import get_db_connection
 
-
 def getAllActivitiesEndpoint():
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
