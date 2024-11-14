@@ -9,43 +9,42 @@ def getAllStudentsEndpoint():
     connection.close()
     return students
 
-def getStudentById(student_id):
+def getStudentByCi(student_ci):
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
-    #Consulta parametrizada
-    query = "SELECT * FROM alumnos where id = %s"
-    cursor.execute(query, (student_id,)) #Pasamos el id de la actividad como una tupla de un solo elemento
+    query = "SELECT * FROM alumnos WHERE ci = %s"
+    cursor.execute(query, (student_ci,))
     student = cursor.fetchone()
     cursor.close()
     connection.close()
     return student
 
-def addStudentEndpoint(student_id, first_name, last_name, birth_date, contact_phone, email_address): 
+def addStudentEndpoint(student_ci, nombre, apellido, fecha_nacimiento, telefono, correo): 
     connection = get_db_connection() 
     cursor = connection.cursor() 
-    query = "INSERT INTO alumnos (id, first_name, last_name, birth_date, contact_phone, email_address) VALUES (%s, %s, %s, %s, %s, %s)" 
-    cursor.execute(query, (student_id, first_name, last_name, birth_date, contact_phone, email_address)) 
-    connection.commit() # Confirmamos la transacción 
+    query = "INSERT INTO alumnos (ci, nombre, apellido, fecha_nacimiento, telefono, correo) VALUES (%s, %s, %s, %s, %s, %s)" 
+    cursor.execute(query, (student_ci, nombre, apellido, fecha_nacimiento, telefono, correo)) 
+    connection.commit()
     cursor.close() 
     connection.close() 
-    return {"message": "Alumno agregado exitosamente", "id": student_id}
+    return {"message": "Alumno agregado exitosamente", "ci": student_ci}
 
-def modifyStudent(student_id, first_name, last_name, birth_date, contact_phone, email_address):
+def modifyStudent(student_ci, nombre, apellido, fecha_nacimiento, telefono, correo):
     connection = get_db_connection()
     cursor = connection.cursor()
-    query = "UPDATE alumnos SET first_name = %s, last_name = %s, birth_date = %s, contact_phone = %s, email_addres = %s WHERE id = %s"
-    cursor.execute(query, (first_name, last_name, birth_date, contact_phone, email_address))
-    connection.commit()  # Confirmamos la transacción
+    query = "UPDATE alumnos SET nombre = %s, apellido = %s, fecha_nacimiento = %s, telefono = %s, correo = %s WHERE ci = %s"
+    cursor.execute(query, (nombre, apellido, fecha_nacimiento, telefono, correo, student_ci))
+    connection.commit()
     cursor.close()
     connection.close()
-    return {"message": "Alumno modificado exitosamente", "id": student_id}
+    return {"message": "Alumno modificado exitosamente", "ci": student_ci}
 
-def deleteStudent(student_id):
+def deleteStudent(student_ci):
     connection = get_db_connection()
     cursor = connection.cursor()
-    query = "DELETE FROM alumnos WHERE id = %s"
-    cursor.execute(query, (student_id,))
-    connection.commit()  # Confirmamos la transacción
+    query = "DELETE FROM alumnos WHERE ci = %s"
+    cursor.execute(query, (student_ci,))
+    connection.commit()
     cursor.close()
     connection.close()
-    return {"message": "Alumno eliminado exitosamente", "id": student_id}
+    return {"message": "Alumno eliminado exitosamente", "ci": student_ci}
