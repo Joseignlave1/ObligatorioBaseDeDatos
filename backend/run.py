@@ -8,6 +8,7 @@ from backend.views.activity_routes import activity_bp
 from backend.views.shift_routes import shift_bp
 from backend.views.student_routes import student_bp
 from backend.__init__ import create_app
+from backend.views.equipment_routes import equipment_bp
 
 
 # Añade el directorio raíz del proyecto a `sys.path`
@@ -20,7 +21,7 @@ app.register_blueprint(auth_bp, url_prefix = '/api')
 app.register_blueprint(activity_bp, url_prefix = '/api')
 app.register_blueprint(shift_bp, url_prefix = '/api')
 app.register_blueprint(student_bp, url_prefix = '/api')
-
+app.register_blueprint(equipment_bp, url_prefix="/api")
 
 #Errores cuando no se envia el token
 @jwt.unauthorized_loader
