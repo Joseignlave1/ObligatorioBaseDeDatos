@@ -22,18 +22,19 @@ def getActivityByIdEndpoint(activity_id):
     connection.close()
     return activity
 
-def modifyActivityEndpoint(activity_id, description, cost):
+def modifyActivityEndpoint(activity_id, description, cost, minimum_age):
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
-    query = "UPDATE actividades SET descripcion = %s, costo = %s WHERE id = %s"
-    cursor.execute(query, (description, cost, activity_id))
-    updatedActivity = cursor.fetchone()
-    connection.commit()
+    query = """
+        UPDATE actividades 
+        SET descripcion = %s, costo = %s, edad_minima = %s 
+        WHERE id = %s
+    """
+    cursor.execute(query, (description, cost, minimum_age, activity_id)) 
+    connection.commit()  # Asegurarse de guardar los cambios
     cursor.close()
     connection.close()
-    return {"message": "Turno modificado exitosamente", "id": activity_id}
-
-
+    return {"message": "Actividad modificada exitosamente", "id": activity_id}
 
 def addActivity(description, cost, minimumAge):
     connection = get_db_connection()
@@ -51,4 +52,27 @@ def addActivity(description, cost, minimumAge):
     cursor.close()
     connection.close()
     return createdActivity
+
+def deleteActivityEndpoint(activity_id):
+    connection = get_db_connection()
+    cursor = connection.cursor(dictionary=True)
+    
+    # Primero verificamos si la actividad existe
+    query_check = "SELECT * FROM actividades WHERE id = %s"
+    cursor.execute(query_check, (activity_id,))
+    activity = cursor.fetchone()
+    
+    if not activity:
+        cursor.close()
+        connection.close()
+        return None  # Si no existe, devolvemos None para indicar que no fue encontrada
+    
+    # Si existe, procedemos a eliminarla
+    query_delete = "DELETE FROM actividades WHERE id = %s"
+    cursor.execute(query_delete, (activity_id,))
+    connection.commit()
+    
+    cursor.close()
+    connection.close()
+    return {"message": "Actividad eliminada exitosamente", "id": activity_id}
 

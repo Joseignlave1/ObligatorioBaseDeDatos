@@ -1,4 +1,3 @@
-# run.py
 import sys
 from pathlib import Path
 from flask import Flask, jsonify
@@ -13,26 +12,22 @@ from backend.views.equipment_routes import equipment_bp
 
 from backend.views.instructor_routes import instructor_bp
 
-
-
-# Añade el directorio raíz del proyecto a `sys.path`
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 app = create_app()
+
 jwt = JWTManager(app)
 
-app.register_blueprint(auth_bp, url_prefix = '/api')
-app.register_blueprint(activity_bp, url_prefix = '/api')
-app.register_blueprint(shift_bp, url_prefix = '/api')
-app.register_blueprint(student_bp, url_prefix = '/api')
+app.register_blueprint(auth_bp, url_prefix='/api')
+app.register_blueprint(activity_bp, url_prefix='/api')
+app.register_blueprint(shift_bp, url_prefix='/api')
+app.register_blueprint(student_bp, url_prefix='/api')
 app.register_blueprint(class_bp, url_prefix = '/api')
 app.register_blueprint(equipment_bp, url_prefix="/api")
 app.register_blueprint(instructor_bp, url_prefix="/api")
 
-
-#Errores cuando no se envia el token
+# Errores cuando no se envía el token
 @jwt.unauthorized_loader
-
 def unauthorized_response(callback):
     return jsonify({
         "error": "Missing token"
