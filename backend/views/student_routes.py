@@ -1,8 +1,9 @@
+from ..db_connection import get_db_connection
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required
-from backend.controllers.student_controller  import (
+from backend.controllers.student_controller import (
     getAllStudentsEndpoint,
-    getStudentById,
+    getStudentByCi as controller_getStudentByCi,  # Renombramos para evitar conflicto
     addStudentEndpoint,
     modifyStudent,
     deleteStudent
@@ -16,10 +17,10 @@ def getAllStudents():
     students = getAllStudentsEndpoint()
     return jsonify(students)
 
-@student_bp.route("/students/<int:student_id>", methods=['GET'])
+@student_bp.route("/students/<int:student_ci>", methods=['GET'])
 @jwt_required()
-def getStudentByIdRoute(student_id):
-    student = getStudentById(student_id)
+def getStudentByCi(student_ci):
+    student = controller_getStudentByCi(student_ci)  # Llamamos al controlador con el nombre adecuado
     if student:
         return jsonify(student)
     else:
@@ -29,30 +30,37 @@ def getStudentByIdRoute(student_id):
 @jwt_required()
 def addStudent():
     data = request.json
-    student_id = data.get('id')
+    student_ci = data.get('ci')
     first_name = data.get('first_name')
     last_name = data.get('last_name')
     birth_date = data.get('birth_date')
     contact_phone = data.get('contact_phone')
     email_address = data.get('email_address')
-    result = addStudentEndpoint(student_id, first_name, last_name, birth_date, contact_phone, email_address)
+    
+    if not all([student_ci, first_name, last_name, birth_date, contact_phone, email_address]):
+        return jsonify({'message': 'Missing data for required fields'}), 400
+    
+    result = addStudentEndpoint(student_ci, first_name, last_name, birth_date, contact_phone, email_address)
     return jsonify(result), 201
 
-@student_bp.route("/students/<int:student_id>", methods=['PUT'])
+@student_bp.route("/students/<int:student_ci>", methods=['PUT'])
 @jwt_required()
-def modifyStudentRoute(student_id):
+def modifyStudentRoute(student_ci):
     data = request.json
     first_name = data.get('first_name')
     last_name = data.get('last_name')
     birth_date = data.get('birth_date')
     contact_phone = data.get('contact_phone')
     email_address = data.get('email_address')
-    result = modifyStudent(student_id, first_name, last_name, birth_date, contact_phone, email_address)
+    
+    if not all([first_name, last_name, birth_date, contact_phone, email_address]):
+        return jsonify({'message': 'Missing data for required fields'}), 400
+    
+    result = modifyStudent(student_ci, first_name, last_name, birth_date, contact_phone, email_address)
     return jsonify(result)
 
-@student_bp.route("/students/<int:student_id>", methods=['DELETE'])
+@student_bp.route("/students/<int:student_ci>", methods=['DELETE'])
 @jwt_required()
-def deleteStudentRoute(student_id):
-    result = deleteStudent(student_id)
+def deleteStudentRoute(student_ci):
+    result = deleteStudent(student_ci)
     return jsonify(result)
-
