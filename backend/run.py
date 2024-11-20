@@ -9,8 +9,9 @@ from backend.views.shift_routes import shift_bp
 from backend.views.student_routes import student_bp
 from backend.views.class_routes import class_bp
 from backend.views.auth_routes import auth_bp
-from backend.__init__ import create_app
 from backend.views.equipment_routes import equipment_bp
+from backend.__init__ import create_app
+
 
 
 # Añade el directorio raíz del proyecto a `sys.path`
