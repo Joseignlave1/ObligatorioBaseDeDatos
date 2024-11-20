@@ -1,4 +1,3 @@
-from ..db_connection import get_db_connection
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required
 from backend.controllers.student_controller import (
