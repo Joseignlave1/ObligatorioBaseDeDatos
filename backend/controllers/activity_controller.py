@@ -1,3 +1,5 @@
+from venv import create
+
 from ..db_connection import get_db_connection
 
 def getAllActivitiesEndpoint():
@@ -34,7 +36,7 @@ def modifyActivityEndpoint(activity_id, description, cost, minimum_age):
     connection.close()
     return {"message": "Actividad modificada exitosamente", "id": activity_id}
 
-def addActivityEndpoint(description, cost, minimumAge):
+def addActivity(description, cost, minimumAge):
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     query = "INSERT INTO actividades(descripcion, costo, edad_minima) VALUES (%s, %s, %s)"
@@ -73,3 +75,4 @@ def deleteActivityEndpoint(activity_id):
     cursor.close()
     connection.close()
     return {"message": "Actividad eliminada exitosamente", "id": activity_id}
+

@@ -38,7 +38,6 @@ def modifyActivityById(activity_id):
     else:
         return jsonify({'activity': 'Activity not found'}), 404
 
-
 @activity_bp.route("/activities", methods = ['POST'])
 @jwt_required()
 def createActivity():
@@ -52,7 +51,7 @@ def createActivity():
         return jsonify({'Activity' : 'The activity was created succesfully'}, createdActivity), 201
     else:
         return jsonify({'activity' : 'There was a problem creating the activity'}), 400
-    
+
 @activity_bp.route("/activities/<int:activity_id>", methods=['DELETE'])
 @jwt_required()
 def deleteActivity(activity_id):
