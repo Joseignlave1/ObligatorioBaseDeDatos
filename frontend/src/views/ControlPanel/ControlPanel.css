@@ -1,0 +1,39 @@
+.control-panel {
+    padding: 20px;
+    text-align: center;
+    background-color: #333; 
+}
+
+.control-panel-title {
+    font-size: 2em;
+    margin-bottom: 40px; 
+    color: #fff; 
+}
+
+.control-panel-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+    max-width: 1200px; 
+    margin: 0 auto;
+}
+
+.logout-button-container {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .control-panel-cards {
+        grid-template-columns: 1fr 1fr; 
+    }
+}
+
+@media (max-width: 480px) {
+    .control-panel-cards {
+        grid-template-columns: 1fr; 
+    }
+}

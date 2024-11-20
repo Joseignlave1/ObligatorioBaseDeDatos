@@ -1,0 +1,26 @@
+input {
+    background-color: #444;
+    color: white;
+    font-size: 16px;
+    font-family: "Segoe UI";
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #666;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input::placeholder {
+    color: #bbb;
+}
+
+input:focus {
+    border-color: #007aff;
+    box-shadow: 0 0 5px rgba(0, 122, 255, 0.4);
+}
+
+input:hover {
+    border-color: #555;
+}

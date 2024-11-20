@@ -1,11 +1,12 @@
 from flask import Blueprint, jsonify, request
 from backend.controllers.auth_controller import registerEndpoint, loginEndpoint
 from backend.security.Security import Security
+from flask_cors import CORS
 
 auth_bp = Blueprint('auth_bp', __name__)
+CORS(auth_bp)
 
-@auth_bp.route("/register", methods = ['POST'])
-
+@auth_bp.route("/register", methods=['POST'])
 def registerUser():
     data = request.json
     email = data.get("email")
@@ -13,15 +14,14 @@ def registerUser():
 
     userRegistered = registerEndpoint(email, password)
 
-    jwt_token = Security.generate_jwt_token(userRegistered)
-
     if userRegistered is None:
-        return jsonify({'message': 'there was an error with the registration'}), 500
+        return jsonify({'message': 'There was an error with the registration'}), 500
 
-    return jsonify({'message': 'user registered successfully'}, jwt_token), 201
+    jwt_token = Security.generate_jwt_token(userRegistered)
+    
+    return jsonify({'message': 'User registered successfully', 'token': jwt_token}), 201
 
-@auth_bp.route ("/login", methods= ['POST'])
-
+@auth_bp.route("/login", methods=['POST'])
 def loginUser():
     data = request.json
     email = data.get("email")
@@ -29,9 +29,9 @@ def loginUser():
 
     userLogin = loginEndpoint(email, password)
 
+    if not userLogin:
+        return jsonify({'message': 'Error in the credentials'}), 401
+
     jwt_token = Security.generate_jwt_token(userLogin)
 
-    if not userLogin:
-        return jsonify({'message': 'Error in the credencials'}), 401
-    else:
-        return jsonify({'message ': 'Login succesfully'}, jwt_token), 201
+    return jsonify({'message': 'Login successful', 'token': jwt_token}), 200
