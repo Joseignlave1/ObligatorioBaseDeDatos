@@ -10,7 +10,8 @@ from backend.views.student_routes import student_bp
 from backend.views.class_routes import class_bp
 from backend.views.auth_routes import auth_bp
 from backend.views.equipment_routes import equipment_bp
-from backend.__init__ import create_app
+
+from backend.views.instructor_routes import instructor_bp
 
 
 
@@ -26,6 +27,7 @@ app.register_blueprint(shift_bp, url_prefix = '/api')
 app.register_blueprint(student_bp, url_prefix = '/api')
 app.register_blueprint(class_bp, url_prefix = '/api')
 app.register_blueprint(equipment_bp, url_prefix="/api")
+app.register_blueprint(instructor_bp, url_prefix="/api")
 
 
 #Errores cuando no se envia el token
