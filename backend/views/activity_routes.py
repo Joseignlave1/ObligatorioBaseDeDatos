@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required
-from backend.controllers.activity_controller import getAllActivitiesEndpoint, getActivityByIdEndpoint, modifyActivityEndpoint, addActivityEndpoint, deleteActivityEndpoint
+from backend.controllers.activity_controller import getAllActivitiesEndpoint, getActivityByIdEndpoint, modifyActivityEndpoint, addActivityEndpoint , deleteActivityEndpoint
 
 activity_bp = Blueprint('activity_bp', __name__)
 

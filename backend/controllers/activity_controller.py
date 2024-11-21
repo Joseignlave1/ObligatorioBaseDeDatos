@@ -36,7 +36,7 @@ def modifyActivityEndpoint(activity_id, description, cost, minimum_age):
     connection.close()
     return {"message": "Actividad modificada exitosamente", "id": activity_id}
 
-def addActivity(description, cost, minimumAge):
+def addActivityEndpoint(description, cost, minimumAge):
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     query = "INSERT INTO actividades(descripcion, costo, edad_minima) VALUES (%s, %s, %s)"
