@@ -9,7 +9,6 @@ from backend.controllers.class_controller import (
     deleteClassEndpoint
 )
 from backend.models.classModels import (
-    getInstructorByCi,
     getClassesWithInstructorInShift
 )
 from backend.controllers.activity_controller import (
@@ -17,6 +16,9 @@ from backend.controllers.activity_controller import (
 )
 from backend.controllers.shift_controller import (
     getShiftByIdEndpoint
+)
+from backend.controllers.instructor_controller import (
+    getInstructorByIdEndpoint
 )
 
 class_bp = Blueprint('class_bp', __name__)
@@ -55,7 +57,7 @@ def addClass():
     if not isinstance(dictated, bool):
         return jsonify({'message': "'dictated' must be a boolean"}), 400
 
-    instructor = getInstructorByCi(ci_instructor)
+    instructor = getInstructorByIdEndpoint(ci_instructor)
     activity = getActivityByIdEndpoint(id_activity)
     shift = getShiftByIdEndpoint(id_shift)
 
@@ -114,7 +116,7 @@ def modifyClass(class_id):
     if not isinstance(dictated, bool):
         return jsonify({'message': "'dictated' must be a boolean"}), 400
     
-    instructor = getInstructorByCi(ci_instructor)
+    instructor = getInstructorByIdEndpoint(ci_instructor)
     activity = getActivityByIdEndpoint(id_activity)
     shift = getShiftByIdEndpoint(id_shift)
 
