@@ -48,3 +48,25 @@ def deleteStudent(student_ci):
     cursor.close()
     connection.close()
     return {"message": "Alumno eliminado exitosamente", "ci": student_ci}
+
+def addStudentToClass(id_clase, ci_alumno, id_equipamiento):
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    query = "INSERT INTO alumno_clase (id_clase, ci_alumno, id_equipamiento) VALUES (%s, %s, %s)"
+    cursor.execute(query, (id_clase, ci_alumno, id_equipamiento))
+    connection.commit()
+    cursor.close() 
+    connection.close() 
+    return {"message": f"Student with CI {ci_alumno} added to class {id_clase}"}
+
+def deleteStudentFromClassEndpoint(id_clase, ci_alumno):
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    query = "DELETE from alumno_clase WHERE id_clase = %s and ci_alumno = %s"
+    cursor.execute(query, (id_clase, ci_alumno))
+    connection.commit()
+    if cursor.rowcount == 0:
+        return {"message": f"No record found for Student with CI {ci_alumno} in class {id_clase}"}, 404
+    cursor.close()
+    connection.close()
+    return {"message": f"Student with CI {ci_alumno} deleted from class {id_clase}"}
