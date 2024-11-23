@@ -1,0 +1,41 @@
+/venv/
+# Ignorar el entorno virtual de Python
+backend/venv/
+
+# Ignorar archivo de config de Python
+backend/config/
+# Ignorar dependencias de Node.js en frontend
+frontend/node_modules
+frontend/.pnp
+frontend/.pnp.js
+
+# Ignorar carpetas de salida de compilación
+frontend/build
+
+# Ignorar archivos y carpetas de pruebas
+/coverage
+
+# Ignorar archivos de configuración de PyCharm
+.idea/
+
+# Ignorar archivos de caché y bytecode de Python
+*.pyc
+__pycache__/
+
+# Ignorar archivos de configuración de entorno
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+
+# Ignorar archivos de sistema
+.DS_Store
+
+# Ignorar logs de errores de npm y yarn
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
