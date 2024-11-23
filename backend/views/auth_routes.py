@@ -1,10 +1,8 @@
 from flask import Blueprint, jsonify, request
 from backend.controllers.auth_controller import registerEndpoint, loginEndpoint
 from backend.security.Security import Security
-from flask_cors import CORS
 
 auth_bp = Blueprint('auth_bp', __name__)
-CORS(auth_bp)
 
 @auth_bp.route("/register", methods=['POST'])
 def registerUser():
