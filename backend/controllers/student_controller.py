@@ -1,4 +1,9 @@
 from ..db_connection import get_db_connection
+from datetime import datetime
+#Formatear las fechas para que el backend las envie en formato YYYY/MM/DD
+
+def format_date(date):
+    return date.strftime('%Y-%m-%d') if date else None
 
 def getAllStudentsEndpoint():
     connection = get_db_connection()
@@ -7,6 +12,10 @@ def getAllStudentsEndpoint():
     students = cursor.fetchall()
     cursor.close()
     connection.close()
+
+    for student in students:
+        if student['fecha_nacimiento']:
+            student['fecha_nacimiento'] = format_date(student['fecha_nacimiento'])
     return students
 
 def getStudentByCi(student_ci):
