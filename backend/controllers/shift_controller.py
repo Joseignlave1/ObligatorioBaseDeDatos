@@ -4,16 +4,9 @@ from ..db_connection import get_db_connection
 def getAllShiftsEndpoint():
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM turnos")
+    # Devuelve solo HH:mm
+    cursor.execute("SELECT id, TIME_FORMAT(hora_inicio, '%H:%i') AS hora_inicio, TIME_FORMAT(hora_fin, '%H:%i') AS hora_fin FROM turnos")
     shifts = cursor.fetchall()
-
-    # Convertimos los campos de tipo TIME a cadenas si existen en el resultado
-    for shift in shifts:
-        if "hora_inicio" in shift:
-            shift["hora_inicio"] = str(shift["hora_inicio"])
-        if "hora_fin" in shift:
-            shift["hora_fin"] = str(shift["hora_fin"])
-
     cursor.close()
     connection.close()
     return shifts
@@ -26,16 +19,17 @@ def getShiftByIdEndpoint(shift_id):
     cursor.execute(query, (shift_id,))
     shift = cursor.fetchone()
 
-    # Convertimos los campos de tipo TIME a cadenas si existen en el resultado
+    # Convertimos los campos de tipo TIME a cadenas sin segundos
     if shift:
         if "hora_inicio" in shift:
-            shift["hora_inicio"] = str(shift["hora_inicio"])
+            shift["hora_inicio"] = shift["hora_inicio"].strftime('%H:%M')  # Solo HH:mm
         if "hora_fin" in shift:
-            shift["hora_fin"] = str(shift["hora_fin"])
+            shift["hora_fin"] = shift["hora_fin"].strftime('%H:%M')  # Solo HH:mm
 
     cursor.close()
     connection.close()
     return shift
+
 
 
 def addShiftEndpoint(shift_id, hora_inicio, hora_fin):
