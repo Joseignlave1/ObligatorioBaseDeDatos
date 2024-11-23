@@ -1,0 +1,97 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #333; 
+    color: #fff; 
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); 
+    font-family: "Segoe UI";
+}
+
+.table-header {
+    background-color: #444; 
+    color: #fff;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 14px;
+    border-bottom: 2px solid #555; 
+}
+
+.table-row {
+    transition: background-color 0.3s ease;
+}
+
+.table-row:hover {
+    background-color: #555; 
+}
+
+.table-cell {
+    padding: 12px 16px;
+    border-bottom: 1px solid #444;
+    color: #ddd;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.table-no-data {
+    font-size: 16px;
+    color: #bbb;
+    text-align: center;
+    margin-top: 20px;
+    font-style: italic;
+}
+
+.table-row:hover {
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.table-cell, .table-header {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.table .table-cell {
+    padding: 10px; 
+    text-align: center;
+}
+
+.table .table-header:last-child, 
+.table .table-cell:last-child {
+    width: 400px; 
+}
+
+.table-header,
+.table-cell {
+    padding: 10px; 
+    text-align: center; 
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+.table .table-header:last-child,
+.table .table-cell:last-child {
+    width: 400px;
+    text-align: center;
+}
+
+.table-header,
+.table-cell {
+    min-width: 100px;
+    max-width: 200px;
+    word-wrap: break-word; 
+}
+
+.table-cell {
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+.table-cell:last-child {
+    display: flex; 
+    justify-content: center;
+    gap: 8px; 
+}
+

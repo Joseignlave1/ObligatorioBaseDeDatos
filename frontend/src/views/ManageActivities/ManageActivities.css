@@ -1,0 +1,71 @@
+.manageActivities {
+    padding: 20px;
+    background-color: #333; 
+    min-height: 100vh; 
+}
+
+.manageActivities-title {
+    font-size: 2em;
+    margin-bottom: 40px;
+    color: #fff; 
+    text-align: center; 
+}
+
+.manageActivities-table {
+    max-width: 1000px;
+    margin: 0 auto; 
+    border-radius: 12px; 
+    overflow: hidden; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    background-color: #444; 
+    padding: 20px; 
+}
+
+.manageActivities-search {
+    margin-bottom: 20px;
+}
+
+.manageActivities-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;               
+    margin-bottom: 20px;      
+}
+
+.manageActivities-search {
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+}
+
+.manageActivities-search input {
+    flex: 1; 
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; 
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; 
+}
+
+@media (max-width: 768px) {
+    .manageActivities-table {
+        padding: 10px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .manageActivities-title {
+        font-size: 1.5em; 
+    }
+
+    .manageActivities-table {
+        padding: 5px;
+    }
+}

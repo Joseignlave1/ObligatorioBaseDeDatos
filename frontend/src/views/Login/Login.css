@@ -1,0 +1,81 @@
+/* Contenedor principal que reemplaza el uso de body */
+.auth-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Altura completa de la ventana */
+    margin: 0; /* Quitar márgenes por defecto */
+    background-color: #333; /* Fondo oscuro general */
+}
+
+/* Contenedor de la tarjeta */
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px; /* Aumentar el ancho máximo de la tarjeta */
+    padding: 30px; /* Más espacio interno */
+    background-color: #333; /* Fondo oscuro de la tarjeta */
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3); /* Sombra más suave y prominente */
+    color: #fff; /* Texto blanco */
+    text-align: center;
+}
+
+/* Título */
+.auth-title {
+    font-size: 2em; /* Título más grande */
+    font-weight: bold;
+    margin-bottom: 25px; /* Más espacio debajo del título */
+    text-align: center;
+}
+
+/* Formulario */
+.auth-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Mayor espaciado entre los elementos */
+}
+
+/* Botón específico */
+.auth-form .auth-button {
+    margin-top: 20px; /* Mayor separación del contenido superior */
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.auth-form .auth-button button {
+    width: 100%;
+    padding: 15px; /* Botón más alto */
+    background-color: #007aff;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1.1em; /* Fuente más grande */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.auth-form .auth-button button:hover {
+    background-color: #005bb5;
+}
+
+/* Link */
+.auth-link {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 1em; /* Fuente un poco más grande */
+    color: #007aff;
+    text-align: center;
+    text-decoration: none;
+}
+
+.auth-link:hover {
+    text-decoration: underline;
+}
+
