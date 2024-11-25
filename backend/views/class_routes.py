@@ -9,7 +9,8 @@ from backend.controllers.class_controller import (
     deleteClassEndpoint
 )
 from backend.models.classModels import (
-    getClassesWithInstructorInShift
+    getClassesWithInstructorInShift,
+    getShiftByIdForModify
 )
 from backend.controllers.activity_controller import (
     getActivityByIdEndpoint
@@ -62,7 +63,7 @@ def addClass():
 
     instructor = getInstructorByIdEndpoint(ci_instructor)
     activity = getActivityByIdEndpoint(id_activity)
-    shift = getShiftByIdEndpoint(id_shift)
+    shift = getShiftByIdForModify(id_shift)
 
     if instructor is None:
         return jsonify({"message": "Instructor not found"}), 404
@@ -86,12 +87,17 @@ def deleteClassRoute(class_id):
         return jsonify({"message": "Class not found"}), 404
 
     id_shift = class_data.get("id_turno")
-    shift_data = getShiftByIdEndpoint(id_shift)
+    shift_data = getShiftByIdForModify(id_shift)
     if shift_data is None:
         return jsonify({"message": "Shift not found"}), 404
 
-    hora_inicio = shift_data.get('hora_inicio')
-    hora_fin = shift_data.get('hora_fin')
+        # Convertir hora_inicio y hora_fin de cadena a datetime.time
+    try:
+        hora_inicio = datetime.strptime(shift_data.get('hora_inicio'), '%H:%M').time()
+        hora_fin = datetime.strptime(shift_data.get('hora_fin'), '%H:%M').time()
+    except ValueError:
+        return jsonify({"message": "Invalid time format in shift data"}), 400
+
     current_time = datetime.now().time()
 
     if hora_inicio <= current_time <= hora_fin:
@@ -122,7 +128,7 @@ def modifyClass(class_id):
 
     instructor = getInstructorByIdEndpoint(ci_instructor)
     activity = getActivityByIdEndpoint(id_activity)
-    shift = getShiftByIdEndpoint(id_shift)
+    shift = getShiftByIdForModify(id_shift)
 
     if instructor is None:
         return jsonify({"message": "Instructor not found"}), 404
@@ -136,12 +142,16 @@ def modifyClass(class_id):
         return jsonify({"message": "Class not found"}), 404
 
     id_shift_exist_class = class_data.get("id_turno")
-    shift_data = getShiftByIdEndpoint(id_shift_exist_class)
+    shift_data = getShiftByIdForModify(id_shift_exist_class)
     if shift_data is None:
         return jsonify({"message": "Shift not found"}), 404
 
-    hora_inicio = datetime.strptime(shift_data.get('hora_inicio'), '%H:%M:%S').time()
-    hora_fin = datetime.strptime(shift_data.get('hora_fin'), '%H:%M:%S').time()
+    # Convertir hora_inicio y hora_fin de cadena a datetime.time
+    try:
+        hora_inicio = datetime.strptime(shift_data.get('hora_inicio'), '%H:%M').time()
+        hora_fin = datetime.strptime(shift_data.get('hora_fin'), '%H:%M').time()
+    except ValueError:
+        return jsonify({"message": "Invalid time format in shift data"}), 400
     current_time = datetime.now().time()
 
     if hora_inicio <= current_time <= hora_fin:
