@@ -1,33 +1,63 @@
 .reportsReports {
     padding: 20px;
     text-align: center;
-    background-color: #333; /* Fondo oscuro */
+    background-color: #333;
+    /* Fondo oscuro */
 }
 
 .reportsReports-title {
     font-size: 2em;
     margin-bottom: 40px;
-    color: #fff; /* Título en blanco */
+    color: #fff;
+    /* Título en blanco */
 }
 
 .reportsReports-cards {
     display: grid;
-    grid-template-columns: 1fr; /* Una sola columna */
+    grid-template-columns: 1fr;
+    /* Una sola columna */
     gap: 20px;
     justify-items: center;
     align-items: center;
-    max-width: 1000px; /* Max ancho más grande para alargar las tarjetas */
+    max-width: 1000px;
+    /* Max ancho más grande para alargar las tarjetas */
     margin: 0 auto;
 }
 
+.modal-table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    color: #fff;
+}
+
+.modal-table th,
+.modal-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.modal-table th {
+    background-color: #444;
+    color: #fff;
+}
+
+.modal-table tr:nth-child(even) {
+    background-color: #555;
+}
+
+
 @media (max-width: 768px) {
     .reportsReports-cards {
-        grid-template-columns: 1fr; /* Mantener una columna incluso en pantallas medianas */
+        grid-template-columns: 1fr;
+        /* Mantener una columna incluso en pantallas medianas */
     }
 }
 
 @media (max-width: 480px) {
     .reportsReports-cards {
-        grid-template-columns: 1fr; /* También una sola columna en pantallas pequeñas */
+        grid-template-columns: 1fr;
+        /* También una sola columna en pantallas pequeñas */
     }
 }

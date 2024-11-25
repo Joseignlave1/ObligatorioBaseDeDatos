@@ -1,0 +1,73 @@
+.report-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* Espaciado entre divs */
+    margin: 20px 0;
+    padding: 0 20px;
+}
+
+.report-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* Alineación inicial de los elementos */
+    background-color: #444;
+    /* Fondo oscuro */
+    border-radius: 8px;
+    /* Bordes redondeados */
+    padding: 20px;
+    /* Espaciado interno */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    /* Sombra */
+    color: #fff;
+    /* Texto en blanco */
+}
+
+.report-list-rank {
+    font-size: 3em;
+    /* Número grande para el ranking */
+    font-weight: bold;
+    color: #007BFF;
+    /* Azul para destacar */
+    margin-right: 20px;
+    /* Separación del contenido */
+}
+
+.report-list-data {
+    flex: 1;
+    /* Toma el espacio restante */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* Alinea los datos hacia la derecha */
+}
+
+.report-list-field {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    /* Reduce el ancho para que los datos estén más compactos */
+    margin-bottom: 10px;
+    /* Espaciado entre campos */
+}
+
+.report-list-label {
+    font-weight: bold;
+    color: #007BFF;
+    /* Azul para las etiquetas */
+    margin-right: 10px;
+    /* Espaciado entre etiqueta y valor */
+}
+
+.report-list-value {
+    color: #fff;
+    /* Texto blanco para los valores */
+}
+
+.report-list-no-data {
+    text-align: center;
+    color: #ccc;
+    font-size: 1.2em;
+    margin: 20px 0;
+}
