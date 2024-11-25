@@ -10,6 +10,7 @@ from backend.views.student_routes import student_bp
 from backend.views.class_routes import class_bp
 from backend.views.auth_routes import auth_bp
 from backend.views.equipment_routes import equipment_bp
+from backend.views.reports_routes import reports_bp
 
 from backend.views.instructor_routes import instructor_bp
 
@@ -30,6 +31,7 @@ app.register_blueprint(student_bp, url_prefix='/api')
 app.register_blueprint(class_bp, url_prefix = '/api')
 app.register_blueprint(equipment_bp, url_prefix="/api")
 app.register_blueprint(instructor_bp, url_prefix="/api")
+app.register_blueprint(reports_bp, url_prefix="/api")
 
 # Errores cuando no se envía el token
 @jwt.unauthorized_loader
@@ -39,4 +41,4 @@ def unauthorized_response(callback):
     }), 401
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    app.run(debug=True, port=5000)
