@@ -49,19 +49,29 @@ def getReportsMostBusyShifts():
     
     query = """
         SELECT 
-            t.id AS turno_id,  -- Agregar la ID del turno
-            t.hora_inicio,
-            t.hora_fin,
-            COUNT(ac.id_clase) AS inscripciones
+            t.id AS turno_id,
+            TIME_FORMAT(t.hora_inicio, '%H:%i') AS hora_inicio,
+            TIME_FORMAT(t.hora_fin, '%H:%i') AS hora_fin,
+            COUNT(c.id) AS clases_dictadas
         FROM turnos t
-        LEFT JOIN clase c ON t.id = c.id_turno
-        LEFT JOIN alumno_clase ac ON c.id = ac.id_clase
+        LEFT JOIN clase c ON t.id = c.id_turno AND c.dictada = TRUE
         GROUP BY t.id, t.hora_inicio, t.hora_fin
-        ORDER BY inscripciones DESC;
+        ORDER BY clases_dictadas DESC;
     """
     cursor.execute(query)
     result = cursor.fetchall()
-    shifts = [{"turno_id": row['turno_id'], "hora_inicio": row['hora_inicio'], "hora_fin": row['hora_fin'], "inscripciones": row['inscripciones']} for row in result]
+
+    shifts = [
+        {
+            "turno_id": row["turno_id"],
+            "hora_inicio": row["hora_inicio"],
+            "hora_fin": row["hora_fin"],
+            "clases_dictadas": row["clases_dictadas"]  # Usa directamente "clases_dictadas"
+        }
+        for row in result
+    ]
+
     cursor.close()
     connection.close()
     return shifts
+
