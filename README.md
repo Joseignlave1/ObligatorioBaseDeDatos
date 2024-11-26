@@ -25,13 +25,20 @@ Clona o descarga el repositorio en tu máquina local.
 
 ---
 
-### Paso 3: Levantar el frontend
+### Paso 3: Levantar el backend
 
-1. Ubícate en la carpeta /frontend del proyecto.
-2. 
-3. Ejecuta el comando:
+1. Ubícate en la raíz del proyecto (fuera de la carpeta `backend`).
+2. Ejecuta el comando:
+   ```bash
+   python -m backend.run
+
+---
+### Paso 4: Levantar el frontend
+
+1. Dirígete a la carpeta `frontend/`.
+2. Instala las dependencias ejecutando el siguiente comando:
    ```bash
    npm install
-4. Para iniciar el proyecto ejecuta el siguiente comando:
+3. Una vez instaladas las dependencias con `npm install`, ejecuta el siguiente comando para levantar el servidor del frontend:
    ```bash
    npm start
