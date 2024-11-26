@@ -1,11 +1,11 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';  
+import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
-import PanelCard from '../../components/PanelCard/PanelCard'; 
+import PanelCard from '../../components/PanelCard/PanelCard';
 import './ControlPanel.css';
 
 const ControlPanel = () => {
-    const navigate = useNavigate();  
+    const navigate = useNavigate();
 
     const categories = [
         { title: 'Actividades', buttonText: 'Ver', path: '/manage-activities' },
@@ -13,11 +13,12 @@ const ControlPanel = () => {
         { title: 'Turnos', buttonText: 'Ver', path: '/manage-shifts' },
         { title: 'Clases', buttonText: 'Ver', path: '/manage-classes' },
         { title: 'Instructores', buttonText: 'Ver', path: '/manage-instructors' },
-        { title: 'Reportes', buttonText: 'Ver', path: '/reports' }
+        { title: 'Reportes', buttonText: 'Ver', path: '/reports' },
+        { title: 'Equipamiento', buttonText: 'Ver', path: '/manage-equipments' },
     ];
 
     const handleButtonClick = (path) => {
-        navigate(path);  
+        navigate(path);
     };
 
     const handleLogout = () => {
@@ -34,7 +35,7 @@ const ControlPanel = () => {
                         key={index}
                         title={category.title}
                         buttonText={category.buttonText}
-                        onButtonClick={() => handleButtonClick(category.path)} 
+                        onButtonClick={() => handleButtonClick(category.path)}
                     />
                 ))}
             </div>

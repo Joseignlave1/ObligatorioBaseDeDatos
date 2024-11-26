@@ -12,11 +12,11 @@ def getAllInstructorsEndpoint():
     return instructors
 
 
-def getInstructorByIdEndpoint(instructor_id):
+def getInstructorByIdEndpoint(instructor_ci):
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
     query = "SELECT * FROM instructores WHERE ci = %s"
-    cursor.execute(query, (instructor_id,))
+    cursor.execute(query, (instructor_ci,))
     instructor = cursor.fetchone()
     cursor.close()
     connection.close()
@@ -34,31 +34,22 @@ def addInstructorEndpoint(ci, nombre, apellido):
     return cursor.rowcount > 0
 
 
-# Modificar un instructor, incluido el ID (cédula)
-def modifyInstructorEndpoint(current_ci, new_ci, nombre, apellido):
+def modifyInstructorEndpoint(instructor_ci, nombre, apellido):
     connection = get_db_connection()
     cursor = connection.cursor()
-
-    # Si se desea proporcionar un nuevo CI, se puede incluir en la actualización
-    if new_ci:
-        query = """ UPDATE instructores SET ci = %s, nombre = %s, apellido = %s WHERE ci = %s """
-        cursor.execute(query, (new_ci, nombre, apellido, current_ci))
-    else:
-        query = """ UPDATE instructores SET nombre = %s, apellido = %s WHERE ci = %s"""
-        cursor.execute(query, (nombre, apellido, current_ci))
-
+    query = "UPDATE instructores SET nombre = %s, apellido = %s WHERE ci = %s"
+    cursor.execute(query, (nombre, apellido, instructor_ci))
     connection.commit()
-    rows_affected = cursor.rowcount
     cursor.close()
     connection.close()
-    return rows_affected > 0
+    return {"message": "Instructor modificado exitosamente", "ci": instructor_ci} 
 
 
-def deleteInstructorEndpoint(ci):
+def deleteInstructorEndpoint(instructor_ci):
     connection = get_db_connection()
     cursor = connection.cursor()
     query = "DELETE FROM instructores WHERE ci = %s"
-    cursor.execute(query, (ci,))
+    cursor.execute(query, (instructor_ci,))
     connection.commit()
     rows_affected = cursor.rowcount
     cursor.close()

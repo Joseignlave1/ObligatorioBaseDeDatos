@@ -5,12 +5,14 @@ import Login from './views/Login/Login';
 import ControlPanel from './views/ControlPanel/ControlPanel';
 import ManageActivities from './views/ManageActivities/ManageActivities';
 import ManageClasses from "./views/ManageClasses/ManageClasses";
-// import ManageInstructors from './views/ManageInstructors/ManageInstructors';
+import ManageInstructors from './views/ManageInstructors/ManageInstructors';
+import ManageEquipments from "./views/ManageEquipment/ManageEquipment";
 import ManageShifts from './views/ManageShifts/ManageShifts';
 import ManageStudents from './views/ManageStudents/ManageStudents';
 import Reports from './views/Reports/Reports';
 
 import './App.css';
+
 
 const App = () => {
 
@@ -23,7 +25,8 @@ const App = () => {
         <Route path="/control-panel" element={<ControlPanel />} />
         <Route path="/manage-activities" element={<ManageActivities />} />
         <Route path="/manage-classes" element={<ManageClasses />} />
-        {/* <Route path="/manage-instructors" element={<ManageInstructors />} />*/}
+        <Route path="/manage-instructors" element={<ManageInstructors />} />
+        <Route path="/manage-equipments" element={<ManageEquipments />} />
         <Route path="/manage-shifts" element={<ManageShifts />} />
         <Route path="/manage-students" element={<ManageStudents />} />
         <Route path="/reports" element={<Reports />} />

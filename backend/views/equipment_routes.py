@@ -1,13 +1,25 @@
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required
 from backend.controllers.equipment_controller import (
+    getAllEquipmentEndpoint,
     getEquipmentByActivityEndpoint,
     addEquipmentToActivityEndpoint,
     modifyActivityEquipmentEndpoint,
     deleteEquipmentEndpoint
 )
 
+from backend.controllers.activity_controller import (
+    getActivityByIdEndpoint
+)
+
 equipment_bp = Blueprint('equipment_bp', __name__)
+
+# Obtener todo el equipamiento
+@equipment_bp.route("/equipment/all", methods=["GET"])
+@jwt_required()
+def getAllEquipment():
+    equipment = getAllEquipmentEndpoint()
+    return jsonify(equipment)
 
 # Obtener equipamiento por actividad
 @equipment_bp.route("/equipment/activity/<int:activity_id>", methods=["GET"])
@@ -49,19 +61,26 @@ def addEquipmentToActivity():
         return jsonify({"message": "Ocurrió un error en el servidor"}), 500
 
 # Modificar equipamiento asociado a una actividad
-@equipment_bp.route("/equipment/modify", methods=["PUT"])
+@equipment_bp.route("/equipment/modify/<int:equipment_id>", methods=["PUT"])
 @jwt_required()
-def modifyActivityEquipment():
+def modifyActivityEquipment(equipment_id):
     try:
         data = request.json
-        equipment_id = data.get("id")
+        if not data:
+            return jsonify({'message': 'Invalid or missing JSON data'}), 400
+
+        # if not all(['description' in data, 'cost' in data]):
+        #     return jsonify({'message': 'Missing data for required fields'}), 400
+        
+        if not ('activity_id' in data and
+            'description' in data and
+            'cost' in data):
+            return jsonify({'message': 'Missing data for required fields'}), 400
+
         activity_id = data.get("activity_id")
         description = data.get("description")
         cost = data.get("cost")
 
-        # Esto es para validar que todos los campos necesarios estén presentes
-        if not all([equipment_id, activity_id, description, cost]):
-            return jsonify({"message": "Todos los campos son obligatorios"}), 400
 
         success = modifyActivityEquipmentEndpoint(equipment_id, activity_id, description, cost)
 
@@ -71,9 +90,11 @@ def modifyActivityEquipment():
             return jsonify({'message': 'Equipment not found or no changes made'}), 404
 
     except Exception as e:
-        print(f"Error inesperado al modificar el equipo: {e}")
+        print(f"Error inesperado: {e}")
         return jsonify({"message": "Ocurrió un error en el servidor"}), 500
 
+        
+        
 
 # Eliminar un equipamiento
 @equipment_bp.route("/equipment/delete/<int:equipment_id>", methods=["DELETE"])
