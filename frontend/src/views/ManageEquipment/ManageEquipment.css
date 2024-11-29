@@ -1,17 +1,17 @@
-.manageInstrutor {
+.manageInstructors {
     padding: 20px;
     background-color: #333;
     min-height: 100vh;
 }
 
-.manageInstructor-title {
+.manageInstructors-title {
     font-size: 2em;
     margin-bottom: 40px;
     color: #fff;
     text-align: center;
 }
 
-.manageInstructor-table {
+.manageInstructors-table {
     max-width: 1000px;
     margin: 0 auto;
     border-radius: 12px;
@@ -21,18 +21,18 @@
     padding: 20px;
 }
 
-.manageInstructor-search {
+.manageInstructors-search {
     margin-bottom: 20px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.manageInstructor-search input {
+.manageInstructors-search input {
     flex: 1;
 }
 
-.manageInstructor-buttons {
+.manageInstructors-buttons {
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -52,17 +52,17 @@
 }
 
 @media (max-width: 768px) {
-    .manageInstructor-table {
+    .manageInstructors-table {
         padding: 10px;
     }
 }
 
 @media (max-width: 480px) {
-    .manageInstructor-title {
+    .manageInstructors-title {
         font-size: 1.5em;
     }
 
-    .manageInstructor-table {
+    .manageInstructors-table {
         padding: 5px;
     }
 }

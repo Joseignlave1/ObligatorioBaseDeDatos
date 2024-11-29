@@ -1,6 +1,15 @@
 from ..db_connection import get_db_connection
 import mysql.connector
 
+def getAllEquipmentEndpoint():
+    connection = get_db_connection()
+    cursor = connection.cursor(dictionary=True)
+    query = "SELECT * FROM equipamiento"
+    cursor.execute(query)
+    equipment = cursor.fetchall()
+    cursor.close()
+    connection.close()
+    return equipment
 
 def getEquipmentByActivityEndpoint(activity_id):
     connection = get_db_connection()
@@ -43,12 +52,8 @@ def modifyActivityEquipmentEndpoint(equipment_id, activity_id, description, cost
         connection = get_db_connection()
         cursor = connection.cursor()
 
-        query = """
-            UPDATE equipamiento
-            SET descripcion = %s, costo = %s
-            WHERE id = %s AND id_actividad = %s
-        """
-        cursor.execute(query, (description, cost, equipment_id, activity_id))
+        query = """ UPDATE equipamiento SET id_actividad = %s,  descripcion = %s, costo = %s WHERE id = %s """
+        cursor.execute(query, (activity_id, description, cost, equipment_id))
         connection.commit()
 
         # Para verificar cuántas filas fueron afectadas
